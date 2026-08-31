@@ -3,10 +3,10 @@ services:
     image: mysql:5.7
     container_name: enterprise-user-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: userdb
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
@@ -16,6 +16,10 @@ services:
   user-service:
     image: enterprise-user-service
     container_name: enterprise-user-service
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     ports:
       - "8080:8080"
     depends_on:
