@@ -9,5 +9,9 @@
 
 <p>Spring MVC is alive.</p>
 
+<a href="${pageContext.request.contextPath}/users/login">
+    Go to Login
+</a>
+
 </body>
 </html>

@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
         response.setId(savedUser.getId());
         response.setName(savedUser.getName());
         response.setEmail(savedUser.getEmail());
+        response.setUsername(savedUser.getUsername());
         return response;
         
     }
@@ -91,6 +92,25 @@ public class UserServiceImpl implements UserService {
         response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
+        response.setUsername(user.getUsername());
+        return response;
+    }
+
+    @Override
+    public UserResponse findById(Long userId) {
+        User user = userRepository.findById(userId);
+
+        if(user == null){
+            throw new ServiceException("User not found");
+        }
+        logger.info("User found with id={}", userId);
+        UserResponse response = new UserResponse();
+       
+        response.setId(user.getId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setUsername(user.getUsername());
+        
         return response;
     }
     

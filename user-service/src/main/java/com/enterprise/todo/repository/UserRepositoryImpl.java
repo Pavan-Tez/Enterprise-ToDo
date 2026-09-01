@@ -62,8 +62,32 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        
+        String sql = "SELECT id, username, name, email, password_hash FROM users WHERE id = ?";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                statement.setLong(1, id);
+                LOGGER.info("Finding user by id={}", id);
+
+                try(ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()) {
+                        return new User(
+                            resultSet.getLong("id"),
+                            resultSet.getString("username"),
+                            resultSet.getString("name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password_hash")
+                        );
+                    }
+                    return null;
+                }
+            }catch (SQLException e) {
+                LOGGER.error("Database error while finding user by id={}", id, e);
+                throw new RepositoryException("Failed to find user by id", e);
+            }
+            
     }
 
     @Override

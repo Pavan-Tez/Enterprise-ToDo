@@ -24,5 +24,46 @@ services:
       - "8080:8080"
     depends_on:
       - user-db
+    
+  todo-db:
+    image: mysql:5.7
+    container_name: enterprise-todo-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${TODO_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${TODO_MYSQL_DATABASE}
+      MYSQL_USER: ${TODO_MYSQL_USER}
+      MYSQL_PASSWORD: ${TODO_MYSQL_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - todo-db-data:/var/lib/mysql
+      - ./database/todo-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  todo-service:
+    build:
+      context: ./todo-service
+    container_name: enterprise-todo-service
+    environment:
+      TODO_DB_URL: ${TODO_DB_URL}
+      TODO_DB_USERNAME: ${TODO_DB_USERNAME}
+      TODO_DB_PASSWORD: ${TODO_DB_PASSWORD}
+    ports:
+      - "8081:8080"
+    depends_on:
+      - todo-db
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: enterprise-api-gateway
+    environment:
+      USER_SERVICE_URL: ${USER_SERVICE_URL}
+      TODO_SERVICE_URL: ${TODO_SERVICE_URL}
+    ports:
+        - "8082:8080"
+    depends_on:
+      - user-service
+      - todo-service
+
 volumes:
   user-db-data:
+  todo-db-data:

@@ -7,4 +7,5 @@ import com.enterprise.todo.dto.response.UserResponse;
 public interface UserService {
     UserResponse register(RegisterUserRequest request);
     UserResponse login(LoginRequest request);
+    UserResponse findById(Long userId);
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder/>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <property name="driverClassName"
+                  value="com.mysql.cj.jdbc.Driver"/>
+
+        <property name="url"
+                  value="${TODO_DB_URL}"/>
+
+        <property name="username"
+                  value="${TODO_DB_USERNAME}"/>
+
+        <property name="password"
+                  value="${TODO_DB_PASSWORD}"/>
+
+    </bean>
+
+    <bean id="todoRepository"
+          class="com.enterprise.todo.repository.TodoRepositoryImpl">
+
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="todoService"
+          class="com.enterprise.todo.service.TodoServiceImpl">
+        <property name="todoRepository" ref="todoRepository"/>
+    </bean>
+
+    <bean id="todoController"
+          class="com.enterprise.todo.controller.TodoController">
+        <property name="todoService" ref="todoService"/>
+    </bean>
+
+    <bean id="globalExceptionHandler"
+      class="com.enterprise.todo.exception.GlobalExceptionHandler"/>
+
+</beans>

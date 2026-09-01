@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.enterprise.todo.dto.request.LoginRequest;
 import com.enterprise.todo.dto.request.RegisterUserRequest;
@@ -37,13 +38,14 @@ public class UserController {
 
         logger.info("Login request received for user={}", request.getUsername());
 
+        logger.info("userService is null: {}", userService == null);
         UserResponse userResponse = userService.login(request);
 
         session.setAttribute("userId", userResponse.getId());
 
         logger.info("User logged in successfully with id={}", userResponse.getId());
 
-        return "redirect:/todos";
+        return "redirect:/users/profile";
     }
 
     @GetMapping("/register")
@@ -58,4 +60,30 @@ public class UserController {
         userService.register(request);
         return "redirect:/users/login";
     }  
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+
+        logger.info("User logout requested");
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public ModelAndView profile(HttpSession session) {
+
+        logger.info("Profile page requested");
+
+        Long userId = (Long) session.getAttribute("userId");
+
+        UserResponse user = userService.findById(userId);
+
+        ModelAndView model = new ModelAndView("profile");
+
+        model.addObject("user", user);
+
+        return model;
+    }
 }

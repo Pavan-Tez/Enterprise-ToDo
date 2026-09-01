@@ -7,7 +7,7 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>Enterprise Todo - User Service</display-name>
+    <display-name>Enterprise Todo - Todo Service</display-name>
 
     <!-- Spring root application context -->
     <context-param>

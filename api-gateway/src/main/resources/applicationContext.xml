@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           https://www.springframework.org/schema/context/spring-context.xsd">
+
+       <context:property-placeholder/>
+
+       <context:component-scan
+        base-package="com.enterprise.todo.gateway.config"/>
+
+       <bean id="gatewayProperties"
+            class="com.enterprise.todo.gateway.config.GatewayProperties">
+
+            <property name="userServiceUrl"
+                            value="${USER_SERVICE_URL}"/>
+
+            <property name="todoServiceUrl"
+                            value="${TODO_SERVICE_URL}"/>
+
+       </bean>
+       <bean id="gatewayService"
+            class="com.enterprise.todo.gateway.service.GatewayServiceImpl">
+
+            <constructor-arg ref="restTemplate"/>
+            <constructor-arg ref="gatewayProperties"/>
+
+        </bean>
+
+</beans>
