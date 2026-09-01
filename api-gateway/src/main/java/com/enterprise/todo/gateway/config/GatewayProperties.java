@@ -4,6 +4,7 @@ public class GatewayProperties {
     
     private String userServiceUrl;
     private String todoServiceUrl;
+    
     public String getUserServiceUrl() {
         return userServiceUrl;
     }

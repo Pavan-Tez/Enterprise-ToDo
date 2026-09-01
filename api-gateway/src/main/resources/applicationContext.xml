@@ -32,4 +32,18 @@
 
         </bean>
 
+        <!-- <bean id="routeController"
+            class="com.enterprise.todo.gateway.controller.RouteController">
+
+            <property name="gatewayProxyService"
+                    ref="gatewayProxyService"/>
+
+            <property name="gatewayProperties"
+                    ref="gatewayProperties"/>
+
+        </bean> -->
+
+        <bean id="gatewayProxyService"
+             class="com.enterprise.todo.gateway.service.GatewayProxyServiceImpl"/>
+
 </beans>

@@ -7,7 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.enterprise.todo.dto.request.LoginRequest;
@@ -45,7 +49,7 @@ public class UserController {
 
         logger.info("User logged in successfully with id={}", userResponse.getId());
 
-        return "redirect:/users/profile";
+        return "redirect:/todos";
     }
 
     @GetMapping("/register")
@@ -57,8 +61,9 @@ public class UserController {
     @PostMapping("/register")
     public String register(RegisterUserRequest request){
         logger.info("Registering user: {}", request.getUsername());
-        userService.register(request);
-        return "redirect:/users/login";
+        UserResponse createdUser = userService.register(request);
+        return "redirect:/users/login?notification=account-created&userId="
+                + createdUser.getId();
     }  
 
     @PostMapping("/logout")
@@ -85,5 +90,23 @@ public class UserController {
         model.addObject("user", user);
 
         return model;
+    }
+
+    @PostMapping("/authenticate")
+    @ResponseBody
+    public ResponseEntity<UserResponse> authenticate(@RequestBody LoginRequest request){
+
+        logger.info("Authenticating user: {}", request.getUsername());
+
+        try {
+            UserResponse userResponse = userService.login(request);
+
+            logger.info("User authenticated successfully with id={}", userResponse.getId());
+
+            return ResponseEntity.ok(userResponse);
+        } catch (com.enterprise.todo.exception.ServiceException ex) {
+            logger.warn("Authentication failed for user={}", request.getUsername());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }

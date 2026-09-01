@@ -34,7 +34,7 @@ public class TodoServiceImpl implements TodoService {
         try {
             Todo todo = new Todo();
 
-            todo.setId(userId);
+            todo.setUserId(userId);
             todo.setTitle(createTodoRequest.getTitle());
             todo.setDescription(createTodoRequest.getDescription());
             todo.setStatus(TodoStatus.TODO);

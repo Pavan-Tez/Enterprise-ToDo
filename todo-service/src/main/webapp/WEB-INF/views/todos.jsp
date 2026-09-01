@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -7,6 +8,12 @@
 <body>
 
 <h1>My Todos</h1>
+
+<form action="${pageContext.request.contextPath}/users/logout"
+      method="post"
+      onsubmit="window.alert('Logging out...');">
+    <button type="submit">Logout</button>
+</form>
 
 <a href="${pageContext.request.contextPath}/todos/create">
     Create Todo

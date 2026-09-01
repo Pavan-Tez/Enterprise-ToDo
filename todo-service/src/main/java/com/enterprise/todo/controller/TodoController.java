@@ -2,14 +2,13 @@ package com.enterprise.todo.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.enterprise.todo.dto.request.CreateTodoRequest;
@@ -37,11 +36,10 @@ public class TodoController {
     }
 
     @RequestMapping(value ="/create", method = RequestMethod.POST)
-    public ModelAndView createTodo(@ModelAttribute CreateTodoRequest createTodoRequest, HttpSession session) {
+    public ModelAndView createTodo(
+            @ModelAttribute CreateTodoRequest createTodoRequest,
+            @RequestHeader("X-User-Id") Long userId) {
         LOGGER.info("Handling request to create a new todo");
-        // Implementation for handling the request to create a new todo
-
-        Long userId = (Long) session.getAttribute("userId");
         LOGGER.info("Create todo request for userId={}",userId);
 
         todoService.createTodo(createTodoRequest, userId);
@@ -51,11 +49,8 @@ public class TodoController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getTodos(HttpSession session) {
+    public ModelAndView getTodos(@RequestHeader("X-User-Id") Long userId) {
         LOGGER.info("Handling request to get todos");
-        // Implementation for handling the request to get todos
-
-        Long userId = (Long) session.getAttribute("userId");
         LOGGER.info("Get todos request for userId={}",userId);
 
         List<TodoResponse> todoResponse = todoService.getTodos(userId);
@@ -67,11 +62,10 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/{todoId}", method = RequestMethod.GET)
-    public ModelAndView getTodoById(@PathVariable Long todoId, HttpSession session) {
+    public ModelAndView getTodoById(
+            @PathVariable Long todoId,
+            @RequestHeader("X-User-Id") Long userId) {
         LOGGER.info("Handling request to get todo by ID: {}", todoId);
-        // Implementation for handling the request to get a todo by ID
-
-        Long userId = (Long) session.getAttribute("userId");
         LOGGER.info("Get todo by ID request for userId={}",userId);
 
         TodoResponse todoResponse = todoService.getTodo(todoId, userId);
@@ -83,11 +77,11 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/{todoId}/update", method = RequestMethod.POST)
-    public ModelAndView updateTodo(@PathVariable Long todoId, @ModelAttribute UpdateTodoRequest updateTodoRequest, HttpSession session) {
+    public ModelAndView updateTodo(
+            @PathVariable Long todoId,
+            @ModelAttribute UpdateTodoRequest updateTodoRequest,
+            @RequestHeader("X-User-Id") Long userId) {
         LOGGER.info("Handling request to update todo with ID: {}", todoId);
-        // Implementation for handling the request to update a todo
-
-        Long userId = (Long) session.getAttribute("userId");
         LOGGER.info("Update todo request for userId={}, todoId={}", userId, todoId);
 
         todoService.updateTodo(todoId, userId, updateTodoRequest);
@@ -96,11 +90,10 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/{todoId}/delete", method = RequestMethod.POST)
-    public ModelAndView deleteTodo(@PathVariable Long todoId, HttpSession session) {
+    public ModelAndView deleteTodo(
+            @PathVariable Long todoId,
+            @RequestHeader("X-User-Id") Long userId) {
         LOGGER.info("Handling request to delete todo with ID: {}", todoId);
-        // Implementation for handling the request to delete a todo
-
-        Long userId = (Long) session.getAttribute("userId");
         LOGGER.info("Delete todo request for userId={}, todoId={}", userId, todoId);
 
         todoService.deleteTodo(todoId, userId);
