@@ -1,43 +1,143 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Create User</title>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+
+    <link
+        rel="stylesheet"
+        href="${pageContext.request.contextPath}/assets/xp.css"
+    >
 </head>
-<body>
 
-<h2>Create User</h2>
+<body class="xp-desktop xp-page">
 
-<form method="post" action="${pageContext.request.contextPath}/users/register">
+    <main class="xp-window app-window">
 
-    <label>Name:</label>
-    <input type="text" name="name" required>
+        <div class="xp-titlebar">
+            <span>Enterprise Todo — Create Account</span>
 
-    <br><br>
+            <span class="window-controls">
+                <b>_</b>
+                <b>□</b>
+                <b>×</b>
+            </span>
+        </div>
 
-    <label>Username:</label>
-    <input type="text" name="username" required>
+        <section class="xp-content">
 
-    <br><br>
+            <h1 class="xp-heading">
+                Create a new account
+            </h1>
 
-    <label>Email:</label>
-    <input type="email" name="email">
+            <p class="xp-subtitle">
+                Set up your Enterprise Todo profile.
+            </p>
 
-    <br><br>
+            <form
+                class="xp-form"
+                method="post"
+                action="${pageContext.request.contextPath}/users/register"
+            >
 
-    <label>Password:</label>
-    <input type="password" name="password" required>
+                <div class="form-row">
 
-    <br><br>
+                    <label for="name">
+                        Name
+                    </label>
 
-    <button type="submit">Create Account</button>
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        required
+                    >
 
-</form>
+                </div>
 
-<br>
+                <div class="form-row">
 
-<a href="${pageContext.request.contextPath}/users/login">
-    Already have an account? Login
-</a>
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-row">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                    >
+
+                </div>
+
+                <div class="form-row">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        class="xp-button primary-button"
+                        type="submit"
+                    >
+                        Create Account
+                    </button>
+
+                    <a
+                        class="text-link"
+                        href="${pageContext.request.contextPath}/users/login"
+                    >
+                        Already have an account? Log on
+                    </a>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <footer class="xp-statusbar">
+            Create your profile.
+        </footer>
+
+    </main>
+
+    <div class="xp-taskbar">
+
+        <span class="start-button">
+            <span>⊞</span>
+            start
+        </span>
+
+    </div>
 
 </body>
+
 </html>

@@ -1,41 +1,105 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
     <title>User Profile</title>
+
+    <link
+        rel="stylesheet"
+        href="${pageContext.request.contextPath}/assets/xp.css"
+    >
 </head>
-<body>
 
-<h1>Authentication Test Page</h1>
+<body class="xp-desktop xp-page">
 
-<h2>You are authenticated! 🎉</h2>
+    <main class="xp-window app-window">
 
-<p>
-    <strong>User ID:</strong>
-    ${user.id}
-</p>
+        <div class="xp-titlebar">
+            <span>Enterprise Todo — User Profile</span>
 
-<p>
-    <strong>Username:</strong>
-    ${user.username}
-</p>
-<p>
-    <strong>Name:</strong>
-    ${user.name}
-</p>
+            <span class="window-controls">
+                <b>_</b>
+                <b>□</b>
+                <b>×</b>
+            </span>
+        </div>
 
-<p>
-    <strong>Email:</strong>
-    ${user.email}
-</p>
+        <section class="xp-content">
 
-<br>
+            <h1 class="xp-heading">
+                You are authenticated
+            </h1>
 
-<form action="${pageContext.request.contextPath}/users/logout"
-      method="post">
+            <p class="xp-subtitle">
+                Your account information is shown below.
+            </p>
 
-    <button type="submit">Logout</button>
+            <dl class="detail-list">
 
-</form>
+                <div>
+                    <dt>User ID</dt>
+                    <dd>${user.id}</dd>
+                </div>
+
+                <div>
+                    <dt>Username</dt>
+                    <dd>${user.username}</dd>
+                </div>
+
+                <div>
+                    <dt>Name</dt>
+                    <dd>${user.name}</dd>
+                </div>
+
+                <div>
+                    <dt>Email</dt>
+                    <dd>${user.email}</dd>
+                </div>
+
+            </dl>
+
+            <div class="page-actions">
+
+                <a
+                    class="xp-button primary-button"
+                    href="${pageContext.request.contextPath}/todos"
+                >
+                    My Todos
+                </a>
+
+                <form
+                    action="${pageContext.request.contextPath}/users/logout"
+                    method="post"
+                >
+                    <button
+                        class="xp-button"
+                        type="submit"
+                    >
+                        Log Off
+                    </button>
+                </form>
+
+            </div>
+
+        </section>
+
+        <footer class="xp-statusbar">
+            Authenticated as ${user.username}
+        </footer>
+
+    </main>
+
+    <div class="xp-taskbar">
+
+        <span class="start-button">
+            <span>⊞</span>
+            start
+        </span>
+
+    </div>
 
 </body>
+
 </html>

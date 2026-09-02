@@ -1,5 +1,7 @@
 package com.enterprise.todo.model;
 
+import java.sql.Timestamp;
+
 public class Todo {
 
     private Long id;
@@ -7,6 +9,7 @@ public class Todo {
     private String title;
     private String description;
     private TodoStatus status;
+    private Timestamp createdAt;
 
     public Todo() {
     }
@@ -58,5 +61,13 @@ public class Todo {
 
     public void setStatus(TodoStatus status) {
         this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }

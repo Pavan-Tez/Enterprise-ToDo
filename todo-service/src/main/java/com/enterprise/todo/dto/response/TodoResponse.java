@@ -1,5 +1,6 @@
 package com.enterprise.todo.dto.response;
 
+import java.sql.Timestamp;
 import com.enterprise.todo.model.TodoStatus;
 
 public class TodoResponse {
@@ -8,6 +9,7 @@ public class TodoResponse {
     private String title;
     private String description;
     private TodoStatus status;
+    private Timestamp createdAt;
     
     public Long getId() {
         return id;
@@ -32,6 +34,14 @@ public class TodoResponse {
     }
     public void setStatus(TodoStatus status) {
         this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     

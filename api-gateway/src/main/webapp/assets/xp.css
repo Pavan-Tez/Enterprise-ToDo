@@ -1,0 +1,678 @@
+:root {
+    --xp-blue: #0058e6;
+    --xp-dark-blue: #003399;
+    --xp-light: #ece9d8;
+    --xp-border: #0a246a;
+    --xp-text: #1b1b1b;
+}
+
+
+/* ================================
+   Global
+   ================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body.xp-desktop {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 20px;
+
+    color: var(--xp-text);
+
+    font: 13px Tahoma, Verdana, Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 70% 25%,
+            #86c6ff 0 5%,
+            transparent 22%
+        ),
+        linear-gradient(
+            135deg,
+            #3b98e5 0%,
+            #65b8ef 42%,
+            #1175c5 100%
+        );
+}
+
+
+/* ================================
+   XP Window
+   ================================ */
+
+.xp-window {
+    max-width: 760px;
+    margin: 0 auto;
+
+    overflow: hidden;
+
+    border: 3px solid var(--xp-border);
+    border-radius: 8px 8px 4px 4px;
+
+    background: var(--xp-light);
+
+    box-shadow:
+        0 10px 25px #003c7b88,
+        inset 1px 1px #fff;
+}
+
+.app-window {
+    max-width: 700px;
+}
+
+
+/* ================================
+   XP Title Bar
+   ================================ */
+
+.xp-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 31px;
+
+    padding: 4px 6px 4px 10px;
+
+    color: #fff;
+
+    font-weight: bold;
+
+    text-shadow: 1px 1px #003070;
+
+    background:
+        linear-gradient(
+            #5aa7ef 0%,
+            #1969cf 48%,
+            #0c50b5 100%
+        );
+}
+
+.window-controls {
+    display: none;
+}
+
+
+/* ================================
+   Page Layout
+   ================================ */
+
+.xp-page {
+    min-height: 100vh;
+    padding: 36px 18px 62px;
+}
+
+.xp-content {
+    padding: 28px;
+}
+
+.xp-heading {
+    margin: 0;
+
+    color: #0c3f92;
+
+    font-size: 22px;
+}
+
+.xp-subtitle {
+    margin: 5px 0 20px;
+
+    color: #555;
+}
+
+.eyebrow {
+    margin: 0;
+
+    color: #1c5aa6;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* ================================
+   Welcome Page
+   ================================ */
+
+.welcome-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+
+    min-height: 300px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #fff 0%,
+            #f4f9ff 70%,
+            #d4e9fb 100%
+        );
+}
+
+.welcome-content h1 {
+    margin: 5px 0;
+
+    color: #174a9b;
+
+    font-size: 31px;
+}
+
+.lead {
+    margin: 0 0 24px;
+
+    font-size: 15px;
+}
+
+
+/* ================================
+   XP Logo
+   ================================ */
+
+.xp-logo {
+    display: grid;
+
+    grid-template-columns: repeat(2, 38px);
+
+    gap: 3px;
+
+    transform: skewY(-5deg);
+}
+
+.xp-logo i {
+    display: block;
+
+    width: 38px;
+    height: 38px;
+}
+
+.xp-logo i:nth-child(1) {
+    background: #ef3f23;
+}
+
+.xp-logo i:nth-child(2) {
+    background: #60a917;
+}
+
+.xp-logo i:nth-child(3) {
+    background: #1685d1;
+}
+
+.xp-logo i:nth-child(4) {
+    background: #f5b600;
+}
+
+
+/* ================================
+   Forms
+   ================================ */
+
+.xp-form {
+    display: grid;
+
+    gap: 13px;
+
+    max-width: 440px;
+}
+
+.form-row {
+    display: grid;
+
+    gap: 4px;
+}
+
+.xp-form label {
+    font-weight: bold;
+}
+
+.xp-form input,
+.xp-form textarea,
+.xp-form select {
+    width: 100%;
+
+    padding: 5px;
+
+    border: 2px inset #fff;
+
+    color: #111;
+
+    font: inherit;
+
+    background: #fff;
+}
+
+.xp-form textarea {
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+
+/* ================================
+   Buttons & Actions
+   ================================ */
+
+.xp-button {
+    display: inline-block;
+
+    width: fit-content;
+    min-width: 88px;
+
+    padding: 5px 15px;
+
+    border: 2px outset #fff;
+    border-radius: 3px;
+
+    color: #111;
+
+    text-align: center;
+    text-decoration: none;
+
+    font: inherit;
+
+    background: #ece9d8;
+
+    cursor: pointer;
+}
+
+.xp-button:active {
+    border-style: inset;
+}
+
+.primary-button {
+    color: #fff;
+
+    text-shadow: 1px 1px #003c88;
+
+    background:
+        linear-gradient(
+            #51a9f1,
+            #1764c2
+        );
+}
+
+.danger-button {
+    color: #fff;
+
+    background:
+        linear-gradient(
+            #e27263,
+            #a9271b
+        );
+}
+
+.form-actions,
+.page-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 6px;
+}
+
+.text-link {
+    color: #003c9e;
+
+    text-decoration: underline;
+}
+
+
+/* ================================
+   Notifications
+   ================================ */
+
+.notice {
+    margin: 0 0 16px;
+
+    padding: 8px 10px;
+
+    border: 1px solid #d7a800;
+
+    background: #fff6c8;
+}
+
+.notice.error {
+    border-color: #b23b2c;
+
+    background: #ffe0da;
+}
+
+.notice.success {
+    border-color: #4c9b35;
+
+    background: #e1f3d8;
+}
+
+
+/* ================================
+   Todo Table
+   ================================ */
+
+.xp-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #fff;
+}
+
+.xp-table th {
+    color: #fff;
+
+    text-align: left;
+
+    background:
+        linear-gradient(
+            #4b9be1,
+            #1761b6
+        );
+}
+
+.xp-table th,
+.xp-table td {
+    padding: 8px;
+
+    border: 1px solid #9baec2;
+}
+
+.xp-table tr:nth-child(even) {
+    background: #edf5fd;
+}
+
+
+/* ================================
+   Details
+   ================================ */
+
+.detail-list {
+    margin: 0 0 20px;
+
+    border: 1px solid #a9bfd6;
+
+    background: #fff;
+}
+
+.detail-list div {
+    display: grid;
+
+    grid-template-columns: 120px 1fr;
+
+    padding: 7px 9px;
+
+    border-bottom: 1px solid #d7e2ee;
+}
+
+.detail-list div:last-child {
+    border: 0;
+}
+
+.detail-list dt {
+    font-weight: bold;
+}
+
+.detail-list dd {
+    margin: 0;
+}
+
+
+/* ================================
+   Status Bar
+   ================================ */
+
+.xp-statusbar {
+    padding: 4px 8px;
+
+    border-top: 1px solid #c4c1b6;
+
+    color: #555;
+
+    background: #e7e4d6;
+}
+
+
+/* ================================
+   Taskbar
+   ================================ */
+
+.xp-taskbar {
+    display: none;
+}
+
+
+/* ==================================================
+   LOGOUT CONFIRMATION MODAL
+   ================================================== */
+
+.logout-modal {
+    /* Hidden until Log Off is clicked */
+    display: none;
+
+    /* Always positioned relative to the browser viewport */
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* Ensures the modal is exactly centered */
+    align-items: center;
+    justify-content: center;
+
+    /* Slight dark overlay behind the popup */
+    background: rgba(0, 0, 0, 0.25);
+
+    /* Keep popup above everything else */
+    z-index: 99999;
+}
+
+
+/* ================================
+   Logout Dialog
+   ================================ */
+
+.logout-dialog {
+    width: 360px;
+    max-width: calc(100vw - 30px);
+
+    overflow: hidden;
+
+    border: 1px solid #003c74;
+    border-radius: 6px;
+
+    background: #ece9d8;
+
+    box-shadow:
+        4px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ================================
+   Logout Dialog Title Bar
+   ================================ */
+
+.logout-dialog-titlebar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    height: 26px;
+
+    padding: 0 6px 0 8px;
+
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #3b8eea 0%,
+            #0054b4 45%,
+            #003c8f 100%
+        );
+}
+
+
+/* ================================
+   Logout Close Button
+   ================================ */
+
+.logout-close {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    padding: 0;
+
+    border: 1px solid #fff;
+    border-radius: 3px;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    line-height: 16px;
+
+    background: #d64b3d;
+
+    cursor: pointer;
+}
+
+.logout-close:hover {
+    background: #ef6a5a;
+}
+
+
+/* ================================
+   Logout Dialog Content
+   ================================ */
+
+.logout-dialog-content {
+    display: flex;
+
+    align-items: center;
+
+    padding: 22px 20px 12px;
+
+    color: #000;
+}
+
+
+/* ================================
+   Warning Icon
+   ================================ */
+
+.logout-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
+
+    margin-right: 15px;
+
+    border: 2px solid #8a6d00;
+    border-radius: 50%;
+
+    color: #5c4800;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    background: #f5d65b;
+}
+
+
+/* ================================
+   Logout Message
+   ================================ */
+
+.logout-message strong {
+    font-size: 13px;
+}
+
+.logout-message p {
+    margin: 7px 0 0;
+
+    color: #444;
+
+    font-size: 11px;
+}
+
+
+/* ================================
+   Logout Dialog Actions
+   ================================ */
+
+.logout-dialog-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding: 8px 12px 12px;
+}
+
+
+/* ================================
+   Mobile
+   ================================ */
+
+@media (max-width: 520px) {
+
+    .welcome-content {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        padding: 26px;
+    }
+
+    .xp-page {
+        padding: 18px 10px 54px;
+    }
+
+    .xp-content {
+        padding: 20px;
+    }
+
+    .detail-list div {
+        grid-template-columns: 1fr;
+
+        gap: 2px;
+    }
+
+    .logout-dialog {
+        width: 340px;
+    }
+
+    .logout-dialog-content {
+        padding: 18px 16px 10px;
+    }
+}

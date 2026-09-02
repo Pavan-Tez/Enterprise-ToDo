@@ -8,5 +8,6 @@ public interface GatewayProxyService {
             HttpServletRequest request,
             HttpServletResponse response,
             String targetBaseUrl,
-            Long authenticatedUserId);
+            Long authenticatedUserId,
+            String authenticatedUsername);
 }

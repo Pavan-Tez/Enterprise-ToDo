@@ -17,7 +17,8 @@ public class GatewayProxyServiceImpl implements GatewayProxyService {
             HttpServletRequest request,
             HttpServletResponse response,
             String targetBaseUrl,
-            Long authenticatedUserId) {
+            Long authenticatedUserId,
+            String authenticatedUsername) {
 
         try {
             String targetUrl =
@@ -58,6 +59,9 @@ public class GatewayProxyServiceImpl implements GatewayProxyService {
                 connection.setRequestProperty(
                         "X-User-Id",
                         String.valueOf(authenticatedUserId));
+                connection.setRequestProperty(
+                        "X-User-Name",
+                        authenticatedUsername == null ? "" : authenticatedUsername);
             }
 
             if("POST".equalsIgnoreCase(request.getMethod())

@@ -64,7 +64,7 @@ public class TodoRepositoryImpl implements TodoRepository {
     public Todo findByIdAndUserId(Long todoId, Long userId) {
        
         String sql = 
-                    "SELECT id, user_id, title, description, status "+
+                    "SELECT id, user_id, title, description, status, created_at "+
                     "FROM todos "+
                     "WHERE id = ? AND user_id = ?";
 
@@ -81,6 +81,7 @@ public class TodoRepositoryImpl implements TodoRepository {
                         todo.setTitle(resultSet.getString("title"));
                         todo.setDescription(resultSet.getString("description"));
                         todo.setStatus(TodoStatus.valueOf(resultSet.getString("status")));
+                        todo.setCreatedAt(resultSet.getTimestamp("created_at"));
                         LOGGER.info("Todo found with ID: {}", todo.getId());
                         return todo;
                     }else{
@@ -99,7 +100,7 @@ public class TodoRepositoryImpl implements TodoRepository {
     public List<Todo> findAllByUserId(Long userId) {
         
         String sql = 
-                    "SELECT id, user_id, title, description, status "+
+                    "SELECT id, user_id, title, description, status, created_at "+
                     "FROM todos "+
                     "WHERE user_id = ?";
 
@@ -117,6 +118,7 @@ public class TodoRepositoryImpl implements TodoRepository {
                         todo.setTitle(resultSet.getString("title"));
                         todo.setDescription(resultSet.getString("description"));
                         todo.setStatus(TodoStatus.valueOf(resultSet.getString("status")));
+                        todo.setCreatedAt(resultSet.getTimestamp("created_at"));
                         todos.add(todo);
                     }
                 }

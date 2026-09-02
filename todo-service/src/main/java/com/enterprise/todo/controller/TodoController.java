@@ -27,6 +27,12 @@ public class TodoController {
         this.todoService = todoService;
     }
 
+    @ModelAttribute("loggedInUsername")
+    public String loggedInUsername(
+            @RequestHeader(value = "X-User-Name", required = false) String username) {
+        return username == null ? "" : username;
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView showCreateTodoForm() {
 

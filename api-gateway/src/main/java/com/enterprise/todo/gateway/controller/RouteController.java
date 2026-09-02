@@ -40,6 +40,7 @@ public class RouteController {
                 request,
                 response,
                 gatewayProperties.getUserServiceUrl(),
+                null,
                 null);
     }
 
@@ -52,16 +53,22 @@ public class RouteController {
 
         HttpSession session = request.getSession(false);
         Object userId = session == null ? null : session.getAttribute("userId");
+        Object username = session == null ? null : session.getAttribute("username");
 
         if (!(userId instanceof Long)) {
             response.sendRedirect(request.getContextPath() + "/users/login");
             return;
         }
 
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+
         gatewayProxyService.forward(
                 request,
                 response,
                 gatewayProperties.getTodoServiceUrl(),
-                (Long) userId);
+                (Long) userId,
+                username instanceof String ? (String) username : null);
     }
 }

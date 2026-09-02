@@ -1,77 +1,178 @@
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
     <title>Todo</title>
+
+    <link
+        rel="stylesheet"
+        href="${pageContext.request.contextPath}/assets/xp.css"
+    >
 </head>
-<body>
 
-<h1>Todo</h1>
+<body class="xp-desktop xp-page">
 
-<p><strong>Title:</strong> ${todo.title}</p>
+    <main class="xp-window app-window">
 
-<p><strong>Description:</strong> ${todo.description}</p>
+        <div class="xp-titlebar">
+            <span>Enterprise Todo — Todo Details</span>
 
-<p><strong>Status:</strong> ${todo.status}</p>
+            <span class="window-controls">
+                <b>_</b>
+                <b>□</b>
+                <b>×</b>
+            </span>
+        </div>
 
-<hr>
+        <section class="xp-content">
 
-<h2>Update Todo</h2>
+            <h1 class="xp-heading">
+                ${todo.title}
+            </h1>
 
-<form action="${pageContext.request.contextPath}/todos/${todo.id}/update"
-      method="post">
+            <dl class="detail-list">
 
-    <label>Title:</label>
-    <input type="text" name="title" value="${todo.title}" required>
+                <div>
+                    <dt>Description</dt>
+                    <dd>${todo.description}</dd>
+                </div>
 
-    <br><br>
+                <div>
+                    <dt>Status</dt>
+                    <dd>${todo.status}</dd>
+                </div>
 
-    <label>Description:</label>
-    <textarea name="description">${todo.description}</textarea>
+            </dl>
 
-    <br><br>
+            <h2 class="xp-heading">
+                Update Todo
+            </h2>
 
-    <label>Status:</label>
+            <form
+                class="xp-form"
+                action="${pageContext.request.contextPath}/todos/${todo.id}/update"
+                method="post"
+            >
 
-    <select name="status">
+                <div class="form-row">
 
-        <option value="TODO"
-            ${todo.status == 'TODO' ? 'selected' : ''}>
-            TODO
-        </option>
+                    <label for="title">
+                        Title
+                    </label>
 
-        <option value="IN_PROGRESS"
-            ${todo.status == 'IN_PROGRESS' ? 'selected' : ''}>
-            IN PROGRESS
-        </option>
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        value="${todo.title}"
+                        required
+                    >
 
-        <option value="COMPLETED"
-            ${todo.status == 'COMPLETED' ? 'selected' : ''}>
-            COMPLETED
-        </option>
+                </div>
 
-    </select>
+                <div class="form-row">
 
-    <br><br>
+                    <label for="description">
+                        Description
+                    </label>
 
-    <button type="submit">Update</button>
+                    <textarea
+                        id="description"
+                        name="description"
+                    >${todo.description}</textarea>
 
-</form>
+                </div>
 
-<br>
+                <div class="form-row">
 
-<form action="${pageContext.request.contextPath}/todos/${todo.id}/delete"
-      method="post">
+                    <label for="status">
+                        Status
+                    </label>
 
-    <button type="submit">Delete</button>
+                    <select id="status" name="status">
 
-</form>
+                        <option
+                            value="TODO"
+                            ${todo.status == 'TODO' ? 'selected' : ''}
+                        >
+                            TODO
+                        </option>
 
-<br>
+                        <option
+                            value="IN_PROGRESS"
+                            ${todo.status == 'IN_PROGRESS' ? 'selected' : ''}
+                        >
+                            IN PROGRESS
+                        </option>
 
-<a href="${pageContext.request.contextPath}/todos">
-    Back to Todos
-</a>
+                        <option
+                            value="COMPLETED"
+                            ${todo.status == 'COMPLETED' ? 'selected' : ''}
+                        >
+                            COMPLETED
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        class="xp-button primary-button"
+                        type="submit"
+                    >
+                        Update
+                    </button>
+
+                    <a
+                        class="text-link"
+                        href="${pageContext.request.contextPath}/todos"
+                    >
+                        Back to Todos
+                    </a>
+
+                </div>
+
+            </form>
+
+            <form
+                class="page-actions"
+                action="${pageContext.request.contextPath}/todos/${todo.id}/delete"
+                method="post"
+            >
+
+                <button
+                    class="xp-button danger-button"
+                    type="submit"
+                >
+                    Delete Todo
+                </button>
+
+            </form>
+
+        </section>
+
+        <footer class="xp-statusbar">
+            Todo #${todo.id}
+        </footer>
+
+    </main>
+
+    <div class="xp-taskbar">
+
+        <span class="start-button">
+            <span>⊞</span>
+            start
+        </span>
+
+    </div>
 
 </body>
+
 </html>
+

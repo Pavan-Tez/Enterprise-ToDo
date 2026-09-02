@@ -46,6 +46,7 @@ public class TodoServiceImpl implements TodoService {
             response.setTitle(savedTodo.getTitle());
             response.setDescription(savedTodo.getDescription());
             response.setStatus(savedTodo.getStatus());
+            response.setCreatedAt(savedTodo.getCreatedAt());
 
             return response;
 
@@ -75,6 +76,7 @@ public class TodoServiceImpl implements TodoService {
             response.setTitle(todo.getTitle());
             response.setDescription(todo.getDescription());
             response.setStatus(todo.getStatus());
+            response.setCreatedAt(todo.getCreatedAt());
 
             return response;
 
@@ -100,6 +102,7 @@ public class TodoServiceImpl implements TodoService {
                 response.setTitle(todo.getTitle());
                 response.setDescription(todo.getDescription());
                 response.setStatus(todo.getStatus());
+                response.setCreatedAt(todo.getCreatedAt());
                 return response;
             }).collect(Collectors.toList());
         } catch (RepositoryException e) {
@@ -133,6 +136,7 @@ public class TodoServiceImpl implements TodoService {
             response.setTitle(todo.getTitle());
             response.setDescription(todo.getDescription());
             response.setStatus(todo.getStatus());
+            response.setCreatedAt(todo.getCreatedAt());
 
             return response;
 

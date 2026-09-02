@@ -5,6 +5,7 @@ import com.enterprise.todo.gateway.dto.UserResponse;
 import com.enterprise.todo.gateway.service.GatewayService;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,13 +33,16 @@ public class AuthController {
         }
 
         session.setAttribute("userId", user.getId());
+        session.setAttribute("username", user.getUsername());
 
         return "redirect:/todos";
     }
 
     @PostMapping("/users/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, HttpServletResponse response) {
         session.invalidate();
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        response.setHeader("Clear-Site-Data", "\"cache\"");
         return "redirect:/users/login?notification=logged-out";
     }
     
