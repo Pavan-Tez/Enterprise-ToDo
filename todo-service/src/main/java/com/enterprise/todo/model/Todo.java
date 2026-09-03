@@ -10,6 +10,7 @@ public class Todo {
     private String description;
     private TodoStatus status;
     private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Todo() {
     }
@@ -69,5 +70,13 @@ public class Todo {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

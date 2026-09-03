@@ -10,6 +10,7 @@ public class TodoResponse {
     private String description;
     private TodoStatus status;
     private Timestamp createdAt;
+    private Timestamp modifiedAt;
     
     public Long getId() {
         return id;
@@ -44,5 +45,11 @@ public class TodoResponse {
         this.createdAt = createdAt;
     }
 
-    
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
 }

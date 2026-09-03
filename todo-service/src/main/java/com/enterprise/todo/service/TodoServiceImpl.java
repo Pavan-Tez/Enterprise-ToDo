@@ -1,5 +1,6 @@
 package com.enterprise.todo.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class TodoServiceImpl implements TodoService {
             response.setDescription(savedTodo.getDescription());
             response.setStatus(savedTodo.getStatus());
             response.setCreatedAt(savedTodo.getCreatedAt());
+            response.setModifiedAt(savedTodo.getUpdatedAt());
 
             return response;
 
@@ -77,6 +79,7 @@ public class TodoServiceImpl implements TodoService {
             response.setDescription(todo.getDescription());
             response.setStatus(todo.getStatus());
             response.setCreatedAt(todo.getCreatedAt());
+            response.setModifiedAt(todo.getUpdatedAt());
 
             return response;
 
@@ -96,13 +99,18 @@ public class TodoServiceImpl implements TodoService {
         // Implementation for retrieving all todos for a user
         try {
             List<Todo> todos = todoRepository.findAllByUserId(userId);
-            return todos.stream().map(todo -> {
+            return todos.stream()
+            .sorted(Comparator.comparing(
+                    Todo::getCreatedAt,
+                    Comparator.nullsLast(Comparator.reverseOrder())))
+            .map(todo -> {
                 TodoResponse response = new TodoResponse();
                 response.setId(todo.getId());
                 response.setTitle(todo.getTitle());
                 response.setDescription(todo.getDescription());
                 response.setStatus(todo.getStatus());
                 response.setCreatedAt(todo.getCreatedAt());
+                response.setModifiedAt(todo.getUpdatedAt());
                 return response;
             }).collect(Collectors.toList());
         } catch (RepositoryException e) {
@@ -137,6 +145,7 @@ public class TodoServiceImpl implements TodoService {
             response.setDescription(todo.getDescription());
             response.setStatus(todo.getStatus());
             response.setCreatedAt(todo.getCreatedAt());
+            response.setModifiedAt(todo.getUpdatedAt());
 
             return response;
 

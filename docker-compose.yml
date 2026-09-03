@@ -3,6 +3,7 @@ services:
     image: mysql:5.7
     container_name: enterprise-user-db
     environment:
+      TZ: Asia/Kolkata
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -12,6 +13,12 @@ services:
     volumes:
       - user-db-data:/var/lib/mysql
       - ./database/user-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
   
   user-service:
     build:
@@ -19,18 +26,21 @@ services:
     image: enterprise-user-service
     container_name: enterprise-user-service
     environment:
+      TZ: Asia/Kolkata
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
     ports:
       - "8080:8080"
     depends_on:
-      - user-db
+      user-db:
+        condition: service_healthy
     
   todo-db:
     image: mysql:5.7
     container_name: enterprise-todo-db
     environment:
+      TZ: Asia/Kolkata
       MYSQL_ROOT_PASSWORD: ${TODO_MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${TODO_MYSQL_DATABASE}
       MYSQL_USER: ${TODO_MYSQL_USER}
@@ -40,24 +50,33 @@ services:
     volumes:
       - todo-db-data:/var/lib/mysql
       - ./database/todo-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p$$TODO_MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
   
   todo-service:
     build:
       context: ./todo-service
     container_name: enterprise-todo-service
     environment:
+      TZ: Asia/Kolkata
       TODO_DB_URL: ${TODO_DB_URL}
       TODO_DB_USERNAME: ${TODO_DB_USERNAME}
       TODO_DB_PASSWORD: ${TODO_DB_PASSWORD}
     ports:
       - "8081:8080"
     depends_on:
-      - todo-db
-
+      todo-db:
+        condition: service_healthy
+  
   api-gateway:
     build: ./api-gateway
     container_name: enterprise-api-gateway
     environment:
+      TZ: Asia/Kolkata
       USER_SERVICE_URL: ${USER_SERVICE_URL}
       TODO_SERVICE_URL: ${TODO_SERVICE_URL}
     ports:
